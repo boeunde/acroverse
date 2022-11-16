@@ -1,0 +1,351 @@
+/* -- Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    text-decoration-line: none;
+    box-sizing: border-box;
+}
+/* -- HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section{
+	display: block;
+}
+body {
+	line-height: 1;
+    box-sizing: border-box;
+}
+ol, ul{
+	list-style: none;
+}
+blockquote, q{
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after{
+	content: '';
+	content: none;
+}
+table{
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* -- 폰트 관련 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css");
+body{
+    font-family: 'pretendard-dynamic-subset','Inter';
+    color: #fff;
+}
+p, span{
+    /* -- transform을 주면 외곽을 부드럽게 만드는 앤티앨리어싱 효과 */
+    transform: rotate(0.01deg); 
+}
+
+/* -- 기본 스크롤 숨기기, 섹션 스냅 관련 */
+html{
+    overflow-y: scroll;
+    scroll-snap-type: block mandatory;
+    scroll-behavior: smooth;
+
+    overscroll-behavior-y: none; /* -- 크롬 브라우저 버그 해결을 위한 필수 속성 */
+
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+section{
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* -- a 리셋 */
+a:link, a:visited, a:active{
+    color: #fff;
+}
+
+/* -- 공통 레이아웃 관련 */
+html{
+    overflow-x: hidden;
+    background-color: #101010;
+}
+html, body, main{
+    height: 100%;
+}
+::selection{
+    background-color: #fff;
+    color: #101010;
+}
+
+/* -- 헤더 관련*/
+header{
+    background-color: #101010;
+
+    height: 80px;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    padding: 0 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+
+    transition: 0.3s ease-in-out;
+}
+header > a{
+    width: 120px;
+    height: 20px;
+    transition: 0.3s ease;
+}
+header > a > i{
+    /* -- 헤더 로고 */
+    display: block;
+    width: 120px;
+    height: 20px;
+    background-image: url(./res/ic_logo.svg.svg);
+    transition: 0.3s ease-in-out;
+    opacity: 0;
+}
+header > a:hover{
+    margin-left: 0;
+    margin-bottom: 5px;
+}
+
+/* -- 화살표 버튼 관련 */
+#tothebottom{
+    position: fixed;
+    right: 24px;
+    bottom: 26px;
+    transition: 1s ease-in-out;
+}
+.ani-bounce {
+    animation: bounce 2s ease infinite;
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-12px) scale(0.9, 1.2);}
+    60% {transform: translateY(-6px) scale(0.9, 1.2);}
+}
+
+/* -- 모달 팝업 호출 버튼 관련 */
+/* -- 스타일초기화 */
+header > input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+header > input::-ms-clear{
+    display: none;
+}
+/* -- 모달 팝업 호출 버튼 디자인 */
+input#btn-nav-layer{
+    z-index: 200;
+}
+input[id=btn-nav-layer]:checked~#box-nav-layer{
+    top: 0;
+
+    /* -- 팝업이 내려오는 속도 */
+    transition: 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+header > input[id=btn-nav-layer]{
+    display: none;
+}
+label[for=btn-nav-layer]{
+    position: relative;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    z-index: 200;
+}
+label[for=btn-nav-layer] span{
+    display: inline-block;
+    position: absolute;
+    background-color: #fff;
+    transition: 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+label[for=btn-nav-layer] span:nth-child(1){
+    width: 38px;
+    height: 1.5px;
+}
+label[for=btn-nav-layer] span:nth-child(2){
+    width: 1.5px;
+    height: 20px;
+}
+label:hover > span:nth-child(1){
+    width: 42px;
+}
+label:hover > span:nth-child(2){
+    height: 24px;
+}
+input[id=btn-nav-layer]:checked+label span:nth-child(1){
+    width: 20px;
+    height: 1.5px;
+    transform: translate(-50%, -50%) rotate(.625turn);
+}
+input[id=btn-nav-layer]:checked+label span:nth-child(2){
+    width: 1.5px;
+    height: 20px;
+    transform: translate(-50%, -50%) rotate(.625turn);
+}
+
+/* -- 모달 팝업 관련 */
+#box-nav-layer{
+    position: absolute;
+    width: 100%;
+    height: 90vh;
+    top: -90vh;
+    left: 0;
+    background-color: rgba(30, 30, 30, 0.98);
+
+    /* -- 팝업이 올라가는 속도 */
+    transition: 0.3s ease-in-out;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+#box-nav-layer ul{
+    justify-content: center;
+    align-items: center;
+
+    width: fit-content;
+    max-width: 380px;
+}
+#box-nav-layer li{
+    margin: 0 20px;
+    list-style: none;
+    font-size: clamp(30px, 5vh, 60px);
+    /* -- 반응형 폰트 크기 */
+    /* -- vw example */
+    /* -- (2vw * 1024px) / 100 = 20.48(px) */
+    /* -- (20.48px * 100) / 1024px = 2(vw) */
+    
+    display: flex;
+    align-items: center;
+}
+#box-nav-layer li > a{
+    color: #fff;
+    line-height: 1.5;
+    position: relative;
+}
+#box-nav-layer li > a:after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 1px;
+    left: 0;
+    bottom: 6px;
+    background-color: #fff;
+    transition: 0.12s ease-in;
+}
+#box-nav-layer li > a:hover:after{
+    width: 100%;
+}
+#box-nav-layer li > a.nowhiring:hover{
+    color: #ffC062;
+    transition: 0.3s ease-in-out;
+}
+#box-nav-layer li > a.nowhiring:hover:after{
+    background-color: #ffC062;
+}
+
+/* -- 채용 중 뱃지 관련 */
+#nowhiring{
+    font-size: clamp(12px, 1.4vw, 16px);
+    font-weight: 800;
+    color: #101010;
+    background-color: #ffC062;
+    padding: 4px 10px 3px 10px; 
+    left: 8px;
+    border-radius: 100px;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    
+    animation: 3s linear infinite ringing_effect;
+    }
+    @keyframes ringing_effect {
+        0%, 12%, 100% {transform: rotate(0deg);}
+        11% {transform: rotate(3.0deg);}
+        15% {transform: rotate(-4.0deg);}
+        20% {transform: rotate(0deg);}
+}
+#nowhiring::after{
+    content:'23\' 신입사원 채용 중\A(11/16~11/30)';
+    font-size: clamp(10px, 1vw, 13px);
+    font-weight: 500;
+    line-height: 1.2;
+    color: #ffC062;
+    opacity: 80%;
+    display: flex;
+    position: absolute;
+    justify-content: flex-end;
+    text-align: right;
+
+    width: 101%;
+    margin-top: 8px;
+    left: 0;
+    right: 0;
+}
+
+/* -- Section 공통 가이드라인 관련 */
+main > section{
+    height: 100%;
+    display: flex;
+    
+    justify-content: left;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+
+    opacity: 0;
+    transition: all 2.2s;
+
+    margin-bottom: 1px;
+}
+
+
+/* -- 반응형 */
+@media (max-width: 359px){
+    /* -- 모달 팝업 관련 */
+    #box-nav-layer li{
+        font-size: clamp(28px, 4vh, 40px);
+    }
+}
+@media (min-width: 600px){
+    /* -- 모달 팝업 관련 */
+    #box-nav-layer li{
+        font-size: clamp(28px, 5vh, 50px);
+    }
+}
+@media (min-width: 1000px){
+    /* -- 모달 팝업 관련 */
+    #box-nav-layer li{
+        font-size: clamp(28px, 6vh, 60px);
+    }
+}
