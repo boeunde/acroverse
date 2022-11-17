@@ -313,7 +313,7 @@ input[id=btn-nav-layer]:checked+label span:nth-child(2){
     right: 0;
 }
 
-/* -- Section 공통 가이드라인 관련 */
+/* -- 섹션 공통 레이아웃 관련 */
 main > section{
     height: 100%;
     display: flex;
@@ -328,6 +328,492 @@ main > section{
 
     margin-bottom: 1px;
 }
+.container{
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #fff;
+
+    display: flex;
+    overflow: hidden;
+}
+.column-num{
+    padding: 112px 0 0 0;
+    width: 11vw;
+    min-width: 53px;
+    max-width: 104px;
+    height: 100%;
+    border-right: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    
+    transition: 0.3s ease;
+}
+.column-body{
+    padding-top: 80px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* -- 600px 초과에서 row으로 변경*/
+    justify-content: left;
+}
+.web-single{
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+.web-left{
+    border-bottom: 1px solid #fff;
+    position: relative;
+
+    width: 100%; /* -- 600px 초과에서 width, height 비율 전환 */
+    height: 50%;
+}
+.web-left::after{
+    content: '';
+    width: 1px;
+    background-color: #fff;
+    height: 80px;
+    position: absolute;
+    top: -80px;
+    right: -1px;
+}
+.web-right{
+    width: 100%;
+    height: 50%;
+}
+.body-wrap{
+    padding: 32px 20px 20px 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+    transition: 0.3s ease;
+}
+.vertical-blank{
+    width: 1px;
+    background-color: #fff;
+    height: auto;
+    flex-grow: 1;
+}
+/* -- 섹션 공통 텍스트 스타일 관련 */
+.column-num > .title,
+.body-wrap > .title{
+    font-size: clamp(12px, 1.8vw, 24px);
+    font-weight: 600;
+    line-height: 1.65;
+    color: #b0b0b0;
+
+    margin-bottom: 8px;
+}
+.body-wrap{
+    font-size: clamp(13px, 1.95vw, 26px);
+    line-height: 1.5;
+    color: #f5f5f5;
+}
+.body-wrap > strong, .bizline-strong{
+    font-size: clamp(16px, 2.4vw, 32px);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+    display: block;
+
+    margin-bottom: 8px;
+}
+.column-num > p,
+.body-wrap > p{
+    font-weight: 200;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    position: relative;
+}
+.body-wrap > p.dot{
+    font-size: clamp(11px, 1.2vw, 16.5px);
+    font-weight: 100;
+    letter-spacing: 0.2px;
+    padding-left: 18px;
+}
+.body-wrap > p.dot::after{
+    content: '';
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -55%);
+    background-image: url(res/ic_deco_blink.svg);
+    background-size: 12px;
+}
+/* -- 섹션 공통 컴포넌트 관련 */
+button{
+    background-color: #101010;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: clamp(16px, 1.92vw, 19.2px);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    padding: 14px 18px;
+    width: fit-content;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+/* -- 섹션 1 디자인 */
+#section1{
+    padding: 0;
+    overflow: hidden;
+}
+#section1 > div{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #f5f5f5;
+    padding: 1vh 4vw;
+    transition: 0.3s ease-in-out;
+}
+#section1 > div:nth-child(1),
+#section1 > div:nth-child(3){
+    animation: spacing-r 9s 4s infinite;
+}
+#section1 > div:nth-child(2){
+    animation: spacing-l 9s 4s infinite;
+}
+@keyframes spacing-r{
+    0%, 100% {}
+    40% {padding-right: 10vw;}
+}
+@keyframes spacing-l{
+    0%, 100% {}
+    40% {padding-left: 25vw;}
+}
+@keyframes spacing-r-web{
+    0%, 100% {}
+    40% {padding-right: 60vw;}
+}
+@keyframes spacing-l-web{
+    0%, 100% {}
+    40% {padding-left: 60vw;}
+}
+@media (min-width:1400px){
+    #section1 > div:nth-child(1),
+    #section1 > div:nth-child(3){
+        animation: spacing-r-web 9s 4s infinite;
+    }
+    #section1 > div:nth-child(2){
+        animation: spacing-l-web 9s 4s infinite;
+    }
+}
+#section1 > div:nth-of-type(3){
+    padding-right: 0;
+}
+#section1 > div > span{
+    font-size: clamp(40px, 14vw, 90px);
+    font-weight: 300;
+    display: inline;
+    opacity: 0;
+    transition: 0.1s ease;
+}
+#section1 > div > span:last-child{
+    position: relative;
+}
+#section1 > div > span:last-child::after{
+    content: '';
+    width: 36px;
+    height: 36px;
+    background-image: url(./res/ic_deco_blink.svg);
+
+    position: absolute;
+    left: 12vw;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 한 글자씩 등장 */
+#section1 > div > span.delay-1{
+    animation: opacity 2s 0.1s forwards;
+}
+#section1 > div > span.delay-3{
+    animation: opacity 2s 0.3s forwards;
+}
+#section1 > div > span.delay-5{
+    animation: opacity 2s 0.5s forwards;
+}
+#section1 > div > span.delay-7{
+    animation: opacity 2s 0.7s forwards;
+}
+#section1 > div > div > div,
+#section1 > div > span.delay-9{
+    animation: opacity 2s 0.9s forwards;
+}
+@keyframes opacity{
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+} /* 끝 */
+#section1 > div > span.hidden{
+    color: #101010;
+    opacity: 1;
+}
+#section1 > div > #acro-ko{
+    font-size: 12px;
+    display: inline;
+    width: auto;
+
+    border: 1px solid #fff;
+    background: #101010;
+    padding: 5px 10px 4px 10px;
+    position: absolute;
+    z-index: 1;
+
+    right: 4vw;
+    top: -12px;
+}
+#section1 > div:last-child{
+    border-bottom: 1px solid #fff;
+    padding: 0 0 0 4vw;
+    justify-content: left;
+}
+#section1 > div > ul{
+    background-color: #fff;
+    padding: 6px 16px;
+}
+#section1 > div > ul > li{
+    margin: 10px 0; 
+    cursor: pointer;
+    position: relative;
+    display: flex;
+}
+#section1 > div > ul > li > a{
+    color: #101010;
+    font-size: 18px;
+    font-weight: 800;
+    position: relative;
+}
+#section1 > div > ul > li > a:hover{
+    margin-left: 0px;
+}
+#section1 > div > ul > li > a:link,
+#section1 > div > ul > li > a:visited,
+#section1 > div > ul > li > a:active{
+    color: #101010;
+}
+#section1 > div > ul > li > a:after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: -1px;
+    background-color: #101010;
+    transition: 0.12s ease-in;
+}
+#section1 > div > ul > li > a:hover:after{
+    width: 100%;
+}
+#section1 > div > div{
+    padding: 15px 0 0 20px;
+    font-size: 15px;
+    position: relative;
+}
+#section1 > div > div > p:first-child{
+    font-weight: 100;
+    margin-bottom: 4px;
+}
+#section1 > div > div > div{
+    width: 74px;
+    height: 74px;
+    position: absolute;
+    bottom: 18px;
+    overflow: hidden;
+    transition: 0.5s ease;
+    opacity: 0;
+}
+#section1 > div > div > div > img:nth-of-type(2){
+    width: 74px;
+    height: 74px;
+    background-image: url("./res/ic_logo_circle_band.svg");
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    animation: logo_circle 30s linear infinite;
+    transition: 1s ease-in-out;
+    transform-origin: 50% 50%;
+    }
+    @keyframes logo_circle {
+        0%{transform: rotate(0deg);}
+        100%{transform: rotate(360deg);}
+    }
+
+#section1 > div > div > div > img:nth-of-type(2):hover{
+    animation-duration: 0.66s;
+}
+
+/* -- 섹션 2 디자인 */
+#section2 > .container{
+    border-top: 1px solid #fff;
+}
+/* -- 섹션 3 디자인 */
+.partner{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.partner-row{
+    display: flex;
+    flex: 1;
+}
+.partner-row > div{
+    flex: 1;
+}
+.partner-row > div > i{
+    display: block;    
+    background-repeat: no-repeat;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: 100%;
+    transition: 0.6s ease;
+}
+.partner-row:nth-of-type(1) > div:nth-of-type(1) > i{
+    background-image: url(res/partner/img_logo_lg.svg);
+    width: 55px;
+    height: 24px;
+    transition-delay: 0;
+}
+.partner-row:nth-of-type(1) > div:nth-of-type(2) > i{
+    background-image: url(res/partner/img_logo_samsung.svg);
+    width: 79px;
+    height: 26px;
+    transition-delay: 0.05s;
+}
+.partner-row:nth-of-type(2) > div:nth-of-type(1) > i{
+    background-image: url(res/partner/img_logo_kt.svg);
+    width: 28px;
+    height: 22px;
+    transition-delay: 0.1s;
+}
+.partner-row:nth-of-type(2) > div:nth-of-type(2) > i{
+    background-image: url(res/partner/img_logo_hyundai.svg);
+    width: 102px;
+    height: 14px;
+    transition-delay: 0.15s;
+}
+.partner-row:nth-of-type(3) > div:nth-of-type(1) > i{
+    background-image: url(res/partner/img_logo_adobe.svg);
+    width: 33px;
+    height: 44px;
+    transition-delay: 0.2s;
+}
+.partner-row:nth-of-type(3) > div:nth-of-type(2) > i{
+    background-image: url(res/partner/img_logo_sk.svg);
+    width: 78px;
+    height: 30px;
+    transition-delay: 0.25s;
+}
+
+/* -- 섹션 4 디자인 */
+.bizline{
+    width: 100%;
+    height: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    transition: 0.3s ease;
+}
+.bizline-row,
+.bizline-col{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex: 1;
+}
+.bizline-col{
+    flex-direction: column;
+}
+.bizline-strong{
+    margin: 20px 0 0 20px;    
+    transition: 0.3s ease;
+}
+.bizline-row.large{
+    border-top: 1px solid #fff;
+}
+.bizline-col{
+    border-right: 1px solid #fff;
+}
+.bizline-col:last-child{
+    border-right: unset;
+}
+.bizline-row.medium{
+    border-bottom: 1px solid #fff;
+}
+.bizline-row.medium:last-child{
+    border-bottom: unset;
+}
+.bizline-col.large{
+    position: relative;
+}
+.bizline-hover:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bizline-img-1::after{
+    content: '';
+    width: 108px;
+    height: 108px;
+    background-image: url(res/img_bizline_1.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    position: absolute;
+    right: 11px;
+    bottom: 11px;
+
+    transition: 0.4s ease;
+}
+.bizline-img-2::after{
+    content: '';
+    width: 108px;
+    height: 108px;
+    background-image: url(res/img_bizline_2.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    position: absolute;
+    right: 11px;
+    bottom: 11px;
+
+    transition: 0.4s ease;
+}
+.bizline-img-3::after{
+    content: '';
+    width: 116px;
+    height: 120px;
+    background-image: url(res/img_bizline_3.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    position: absolute;
+    right: 11px;
+    bottom: 11px;
+
+    transition: 0.4s ease;
+}
+.bizline-img-1:hover::after,
+.bizline-img-2:hover::after,
+.bizline-img-3:hover::after{
+    background-size: 90%;
+    right: 2px;
+    bottom: 2px;
+}
 
 
 /* -- 반응형 */
@@ -336,16 +822,154 @@ main > section{
     #box-nav-layer li{
         font-size: clamp(28px, 4vh, 40px);
     }
+    /* -- 섹션 1 디자인 관련 */
+    #section1 > div > span.hidden{
+        display: none;
+    }
+}
+@media (max-width: 599px){
+    /* -- 섹션 1 디자인 관련 */
+    #section1 > div > span.hidden{
+        display: none;
+    }
 }
 @media (min-width: 600px){
     /* -- 모달 팝업 관련 */
     #box-nav-layer li{
         font-size: clamp(28px, 5vh, 50px);
     }
+    /* -- 섹션 공통 레이아웃 관련 */
+    .column-body{
+        flex-direction: row; /* -- 600px 미만에서 column으로 변경*/
+    }
+    .web-left{
+        border-bottom: unset;
+        border-right: 1px solid #fff;
+
+        width: 50%; /* -- 600px 미만에서 width, height 비율 전환 */
+        height: 100%;
+    }
+    .web-right{
+        width: 50%;
+        height: 100%;
+    }
+    .vertical-blank{
+        flex-grow: unset;
+        height: 40px;
+    }
+    /* -- 섹션 공통 텍스트 스타일 관련 */
+    .column-num > .title,
+    .body-wrap > .title,
+    .body-wrap > strong, .bizline-strong,
+    .column-num > p, .body-wrap > p{
+        margin-bottom: 12px;
+    }
+    /* -- 섹션 3 디자인 관련 */
+    .partner-row:nth-of-type(1) > div:nth-of-type(1) > i{
+        width: 82.5px;
+        height: 36px;
+    }
+    .partner-row:nth-of-type(1) > div:nth-of-type(2) > i{
+        width: 118.5px;
+        height: 40px;
+    }
+    .partner-row:nth-of-type(2) > div:nth-of-type(1) > i{
+        width: 42px;
+        height: 33px;
+    }
+    .partner-row:nth-of-type(2) > div:nth-of-type(2) > i{
+        width: 153px;
+        height: 21px;
+    }
+    .partner-row:nth-of-type(3) > div:nth-of-type(1) > i{
+        width: 49.5px;
+        height: 66px;
+    }
+    .partner-row:nth-of-type(3) > div:nth-of-type(2) > i{
+        width: 117px;
+        height: 45px;
+    }
+    /* -- 섹션 4 디자인 관련 */
+    .bizline-img-1::after{
+        width: 162px;
+        height: 162px;
+    }
+    .bizline-img-2::after{
+        width: 162px;
+        height: 162px;
+    }
+    .bizline-img-3::after{
+        width: 174px;
+        height: 180px;
+    }
 }
 @media (min-width: 1000px){
     /* -- 모달 팝업 관련 */
     #box-nav-layer li{
         font-size: clamp(28px, 6vh, 60px);
+    }
+    .column-num{
+        padding-top: 128px;
+    }
+    .body-wrap{
+        padding: 48px 30px 30px 30px;
+    }
+    /* -- 섹션 공통 텍스트 스타일 관련 */
+    .column-num > .title,
+    .body-wrap > .title,
+    .body-wrap > strong, .bizline-strong,
+    .column-num > p, .body-wrap > p{
+        margin-bottom: 16px;
+    }
+    /* -- 섹션 4 디자인 관련 */
+    .bizline-strong{
+        margin: 30px 0 0 30px;
+    }
+    .bizline{
+        height: calc(100% - 90px);
+    }
+}
+@media (min-width: 1600px){
+    .column-num{
+        padding-top: 144px;
+    }
+    .body-wrap{
+        padding: 64px 40px 40px 40px;
+    }
+    /* -- 섹션 공통 텍스트 스타일 관련 */
+    .column-num > .title,
+    .body-wrap > .title,
+    .body-wrap > strong, .bizline-strong,
+    .column-num > p, .body-wrap > p{
+        margin-bottom: 24px;
+    }
+    /* -- 섹션 4 디자인 관련 */
+    .bizline-strong{
+        margin: 30px 0 0 40px;
+    }
+    .bizline{
+        height: calc(100% - 120px);
+    }
+}
+@media (min-height: 700px){
+    /* -- 섹션 공통 레이아웃 관련 */
+    .vertical-blank{
+        flex-grow: unset;
+        height: 40px;
+    }
+}
+@media (max-height: 700px){
+    /* -- 섹션 4 디자인 관련 */
+    .bizline-img-1::after{
+        width: 81px;
+        height: 81px;
+    }
+    .bizline-img-2::after{
+        width: 81px;
+        height: 81px;
+    }
+    .bizline-img-3::after{
+        width: 87px;
+        height: 90px;
     }
 }
