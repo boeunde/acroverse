@@ -27,6 +27,7 @@ footer, header, hgroup, menu, nav, section{
 	display: block;
 }
 body {
+    color: #fff;
 	line-height: 1;
     box-sizing: border-box;
 }
@@ -45,11 +46,15 @@ table{
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+a, img{
+    border: none;
+    outline: none;
+}
 
 /* -- 폰트 관련 */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css");
-body{
-    font-family: 'pretendard-dynamic-subset','Inter';
+body, textarea{
+    font-family: 'pretendard-dynamic-subset','Apple SD Gothic Neo', Sans-serif;
     color: #fff;
 }
 p, span{
@@ -63,9 +68,15 @@ html{
     scroll-snap-type: block mandatory;
     scroll-behavior: smooth;
 
+    -ms-scroll-snap-type: mandatory; /* IE/Edge */  
+    -webkit-scroll-snap-type: mandatory; /* Safari */  
+    -webkit-scroll-snap-destination: 0% 0%;  
+    -webkit-overflow-scrolling: touch; /* important for iOS */  
+
     overscroll-behavior-y: none; /* -- 크롬 브라우저 버그 해결을 위한 필수 속성 */
 
     -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch    
 }
 ::-webkit-scrollbar {
     display: none;
@@ -95,7 +106,7 @@ html, body, main{
 
 /* -- 헤더 관련*/
 header{
-    background-color: #101010;
+    background-color: transparent;
 
     height: 80px;
     left: 0;
@@ -138,10 +149,10 @@ header > a:hover{
     bottom: 26px;
     transition: 1s ease-in-out;
 }
-.ani-bounce {
+.ani-bounce{
     animation: bounce 2s ease infinite;
   }
-  @keyframes bounce {
+  @keyframes bounce{
     0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
     40% {transform: translateY(-12px) scale(0.9, 1.2);}
     60% {transform: translateY(-6px) scale(0.9, 1.2);}
@@ -158,10 +169,10 @@ header > input::-ms-clear{
     display: none;
 }
 /* -- 모달 팝업 호출 버튼 디자인 */
-input#btn-nav-layer{
+header > input#btn-nav-layer{
     z-index: 200;
 }
-input[id=btn-nav-layer]:checked~#box-nav-layer{
+header > input[id=btn-nav-layer]:checked~#box-nav-layer{
     top: 0;
 
     /* -- 팝업이 내려오는 속도 */
@@ -170,14 +181,14 @@ input[id=btn-nav-layer]:checked~#box-nav-layer{
 header > input[id=btn-nav-layer]{
     display: none;
 }
-label[for=btn-nav-layer]{
+header > label[for=btn-nav-layer]{
     position: relative;
     width: 42px;
     height: 42px;
     cursor: pointer;
     z-index: 200;
 }
-label[for=btn-nav-layer] span{
+header > label[for=btn-nav-layer] span{
     display: inline-block;
     position: absolute;
     background-color: #fff;
@@ -187,26 +198,26 @@ label[for=btn-nav-layer] span{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-label[for=btn-nav-layer] span:nth-child(1){
+header > label[for=btn-nav-layer] span:nth-child(1){
     width: 38px;
     height: 1.5px;
 }
-label[for=btn-nav-layer] span:nth-child(2){
+header > label[for=btn-nav-layer] span:nth-child(2){
     width: 1.5px;
     height: 20px;
 }
-label:hover > span:nth-child(1){
+header > label:hover > span:nth-child(1){
     width: 42px;
 }
-label:hover > span:nth-child(2){
+header > label:hover > span:nth-child(2){
     height: 24px;
 }
-input[id=btn-nav-layer]:checked+label span:nth-child(1){
+header > input[id=btn-nav-layer]:checked+label span:nth-child(1){
     width: 20px;
     height: 1.5px;
     transform: translate(-50%, -50%) rotate(.625turn);
 }
-input[id=btn-nav-layer]:checked+label span:nth-child(2){
+header > input[id=btn-nav-layer]:checked+label span:nth-child(2){
     width: 1.5px;
     height: 20px;
     transform: translate(-50%, -50%) rotate(.625turn);
@@ -245,6 +256,7 @@ input[id=btn-nav-layer]:checked+label span:nth-child(2){
     /* -- vw example */
     /* -- (2vw * 1024px) / 100 = 20.48(px) */
     /* -- (20.48px * 100) / 1024px = 2(vw) */
+    font-weight: 700;
     
     display: flex;
     align-items: center;
@@ -296,7 +308,7 @@ input[id=btn-nav-layer]:checked+label span:nth-child(2){
         20% {transform: rotate(0deg);}
 }
 #nowhiring::after{
-    content:'23\' 신입사원 채용 중\A(11/16~11/30)';
+    content:'22\' 하반기 채용 진행\A(11/16~12/14)';
     font-size: clamp(10px, 1vw, 13px);
     font-weight: 500;
     line-height: 1.2;
@@ -325,6 +337,7 @@ main > section{
 
     opacity: 0;
     transition: all 2.2s;
+    position: relative;
 
     margin-bottom: 1px;
 }
@@ -355,6 +368,7 @@ main > section{
     display: flex;
     flex-direction: column; /* -- 600px 초과에서 row으로 변경*/
     justify-content: left;
+    overflow: hidden;
 }
 .web-single{
     position: relative;
@@ -368,6 +382,8 @@ main > section{
 
     width: 100%; /* -- 600px 초과에서 width, height 비율 전환 */
     height: 50%;
+    display: flex;
+    flex-direction: column;
 }
 .web-left::after{
     content: '';
@@ -377,6 +393,8 @@ main > section{
     position: absolute;
     top: -80px;
     right: -1px;
+    display: flex;
+    flex-direction: column;
 }
 .web-right{
     width: 100%;
@@ -388,7 +406,6 @@ main > section{
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    
     transition: 0.3s ease;
 }
 .vertical-blank{
@@ -400,7 +417,7 @@ main > section{
 /* -- 섹션 공통 텍스트 스타일 관련 */
 .column-num > .title,
 .body-wrap > .title{
-    font-size: clamp(12px, 1.8vw, 24px);
+    font-size: clamp(12px, 1.5vw, 20px);
     font-weight: 600;
     line-height: 1.65;
     color: #b0b0b0;
@@ -408,7 +425,7 @@ main > section{
     margin-bottom: 8px;
 }
 .body-wrap{
-    font-size: clamp(13px, 1.95vw, 26px);
+    font-size: clamp(13px, 1.5vw, 20px);
     line-height: 1.5;
     color: #f5f5f5;
 }
@@ -439,24 +456,163 @@ main > section{
     width: 12px;
     height: 12px;
     position: absolute;
-    top: 50%;
+    top: 2px;
     left: 0;
-    transform: translate(0, -55%);
     background-image: url(res/ic_deco_blink.svg);
     background-size: 12px;
 }
 /* -- 섹션 공통 컴포넌트 관련 */
 button{
-    background-color: #101010;
+    background-color: transparent;
     color: #fff;
     border: 1px solid #fff;
-    font-size: clamp(16px, 1.92vw, 19.2px);
+    font-size: clamp(13px, 1.44vw, 19.2px);
     font-weight: 600;
     letter-spacing: -0.5px;
-    padding: 14px 18px;
+    padding: 10px 14px;
     width: fit-content;
     cursor: pointer;
     margin-top: 2px;
+    margin-bottom: 6px;
+
+    position: relative;
+    transition: 0.1s ease;
+}
+button::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0);
+    transition: 0.3s ease;
+    z-index: -1;
+}
+button:hover{
+    color: #101010;
+    transition-delay: 0.12s;
+}
+button:hover::after{
+    background-color: rgba(255, 255, 255, 1);
+    width: 100%;
+}
+
+/* -- 체크박스 + 레이블 타입 */
+input[id=agree]{
+    display: none;
+}
+.checkbox{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    cursor: pointer;
+}
+.checkbox > i{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #828282;
+    border-radius: 2px;
+    transition: 0.3s ease;
+}
+input[id=agree]:checked~.checkbox > i::before{
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffC062;
+    border-radius: 2px;
+    transition: 0.3s ease;
+}
+input[id=agree]:checked~.checkbox > i::after{
+    content: '✔';
+    color: #101010;
+    font-weight: 600;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.3s ease;
+}
+
+/* -- 폼, 인풋필드 디자인 */
+form{
+    position: relative;
+}
+form > label{
+    display: flex;
+    height: fit-content;
+    padding: 2px 0 2px 0;
+    margin-bottom: 4px;
+    font-size: clamp(13px, 1.2vw, 16px);
+}
+form > label > span{
+    display: flex;
+    width: 10vw;
+    min-width: 70px;
+    max-width: 120px;
+    height: fit-content;
+    align-items: center;
+    padding-top: 6px;
+}
+label > input,
+label > input:focus,
+label > input:active,
+label > textarea,
+label > textarea:focus,
+label > textarea:active{
+    border: unset;
+    border-bottom: 1px solid #fff;
+    outline: unset;
+    flex-grow: 1;
+    border-radius: 0;
+}
+form > label > input,
+form > label > textarea{
+    background-color: #101010;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: clamp(16px, 1.92vw, 19.2px);
+    font-weight: 700;
+    padding: 5px 0 5px 0;
+    caret-color: #ffC062;
+    transition: 0.3s ease;
+}
+form > label > input::placeholder,
+form > label > textarea::placeholder{
+    font-size: clamp(13px, 1.2vw, 16px);
+    font-weight: 400;
+    color: #828282;
+}
+form > label > input:focus,
+form > label > textarea:focus{
+    background-color: rgba(255, 192, 98, 0.1);
+    border-bottom: 1px solid #ffc062;
+}
+.check-label{
+    margin: 15px 0 15px 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.check-label > p{
+    margin-left: 12px;
+}
+.check-label:hover~.checkbox > i:first-child{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+#contact-send{
+    position: absolute;
+    right: 0;
 }
 
 /* -- 섹션 1 디자인 */
@@ -475,10 +631,10 @@ button{
 }
 #section1 > div:nth-child(1),
 #section1 > div:nth-child(3){
-    animation: spacing-r 9s 4s infinite;
+    animation: spacing-r 9s 1s infinite;
 }
 #section1 > div:nth-child(2){
-    animation: spacing-l 9s 4s infinite;
+    animation: spacing-l 9s 1s infinite;
 }
 @keyframes spacing-r{
     0%, 100% {}
@@ -510,7 +666,7 @@ button{
 }
 #section1 > div > span{
     font-size: clamp(40px, 14vw, 90px);
-    font-weight: 300;
+    font-weight: 400;
     display: inline;
     opacity: 0;
     transition: 0.1s ease;
@@ -641,7 +797,7 @@ button{
     transition: 1s ease-in-out;
     transform-origin: 50% 50%;
     }
-    @keyframes logo_circle {
+    @keyframes logo_circle{
         0%{transform: rotate(0deg);}
         100%{transform: rotate(360deg);}
     }
@@ -654,6 +810,7 @@ button{
 #section2 > .container{
     border-top: 1px solid #fff;
 }
+
 /* -- 섹션 3 디자인 */
 .partner{
     width: 100%;
@@ -764,7 +921,6 @@ button{
 .bizline-hover:hover{
     background-color: rgba(255, 255, 255, 0.1);
 }
-
 .bizline-img-1::after{
     content: '';
     width: 108px;
@@ -815,8 +971,392 @@ button{
     bottom: 2px;
 }
 
+/* -- 섹션 5 디자인 */
+#section5 > .container > .column-body > .web-left{
+    border-bottom: unset;
+}
+.xunited-img-1{
+    background-image: url(res/img_xunited.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    right: -20%;
+    bottom: -5%;
+    transition: 0.3s ease;
+    opacity: .6;
+}
+#section5 > .container > .column-body > .web-left::after{
+    content: '';
+    height: 0;
+}
+
+/* -- 섹션 6 디자인 */
+.culture-img-1::after,
+.culture-img-2::after{
+    content: '';
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 144px;
+    height: 144px;
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    transition: 0.3s ease;
+    z-index: -1;
+}
+.culture-img-1::after{
+    background-image: url(res/img_culture_1.svg);
+}
+.culture-img-2::after{
+    background-image: url(res/img_culture_2.svg);
+}
+.body-wrap > .culture-strong{
+    font-size: clamp(20px, 3vw, 40px);
+}
+
+/* -- 섹션 7 디자인 */
+.body-wrap.contact{
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+.body-wrap.contact:first-child{
+    border-bottom: 1px solid #fff;
+}
+.contact-img-1::after{
+    content: '';
+    width: 239px;
+    height: 178px;
+    background-image: url(res/img_contact_1.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    right: -20px;
+    bottom: -40px;
+    transition: 0.4s ease;
+
+    display: none;
+}
+.bizline-img-1::after{
+    content: '';
+    width: 108px;
+    height: 108px;
+    background-image: url(res/img_bizline_1.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    position: absolute;
+    right: 11px;
+    bottom: 11px;
+
+    transition: 0.4s ease;
+}
+#email{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.copy{
+    background-image: url(res/btn_copy_clipboard.svg);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50%, 50%;
+    border-radius: 16px;
+    border: unset;
+    width: 32px;
+    height: 32px;
+    padding: unset;
+    z-index: 100;
+    
+    margin: 2px 0 0 4px;
+}
+.copy:hover::after{
+    display: none;
+}
+.copy:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+#section7 > .container > .column-body > .web-left{
+    flex: 1;
+}
+#section7 > .container > .column-body > .web-right{
+    flex: 1.5;
+}
+
+/* -- 섹션 8 디자인 */
+#address{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#section8 > .container > .column-body > .web-left{
+    flex: 1;
+}
+#section8 > .container > .column-body > .web-right{
+    overflow: hidden;
+    position: relative;
+    flex: 0.6;
+}
+#section8 > .container > .column-body.footer > .web-right{
+    flex: 1;
+}
+#map{
+    height: 120%;
+    max-height: 500px;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.3s ease;
+}
+.map-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    right: 6px;
+    bottom: 8px;
+    z-index: 50;
+}
+.map{
+    z-index: 100;
+    font-size: 11px;
+    letter-spacing: 0.25px;
+    margin: 0;
+    padding: 6px 8px;
+    margin-right: 4px;
+}
+.map::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    position: absolute;
+    background-color: #101010;
+}
+#section8{
+    flex-direction: column;
+}
+#section8 > .container{
+    height: calc(60% + 80px);
+}
+#section8 > .container.footer{
+    height: calc(40% - 80px);
+}
+.column-body.footer > .web-left{
+    display: none;
+}
+.column-body.footer{
+    padding-top: unset;
+}
+.body-wrap.footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 11vw;
+}
+.body-wrap.footer > .footer-strong{
+    font-size: clamp(30px, 3.4vw, 45px);
+}
+#nav-footer{
+    font-size: clamp(12px, 1.13vw, 15px);
+    display: flex;
+    flex: 1;
+    height: fit-content;
+    line-height: 1.8;
+}
+#nav-footer ul > li > a{
+    position: relative;
+}
+#nav-footer ul > li > a:after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 1px;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
+    transition: 0.12s ease-in;
+}
+#nav-footer ul > li > a:hover:after{
+    width: 100%;
+}
+#advice{
+    font-size: clamp(10px, 0.98vw ,13px);
+    color: #828282;
+    flex: 2;
+    display: inline-block;
+    height: fit-content;
+}
+#advice > p{
+    margin-top: 12px;
+}
+#advice > p:first-child{
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 8px;
+}
+/* -- 배경 애니메이션 */
+.body-wrap.footer{
+    position: relative;
+    overflow: hidden;
+}
+.body-wrap.footer > i{
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 450px;
+    height: 450px;
+    top: 50%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    transition: 0.1s ease-in;
+    animation: ring 5s infinite;
+}
+.body-wrap.footer > i:hover{
+    animation-duration: 1s;
+    width: 530px;
+    height: 530px;
+}
+@keyframes ring{
+    0%{background-image: url(./res/ring/ring_001.png);}
+    1%{background-image: url(./res/ring/ring_002.png);}
+    2%{background-image: url(./res/ring/ring_003.png);}
+    3%{background-image: url(./res/ring/ring_004.png);}
+    4%{background-image: url(./res/ring/ring_005.png);}
+    5%{background-image: url(./res/ring/ring_006.png);}
+    6%{background-image: url(./res/ring/ring_007.png);}
+    7%{background-image: url(./res/ring/ring_008.png);}
+    8%{background-image: url(./res/ring/ring_009.png);}
+    9%{background-image: url(./res/ring/ring_010.png);}
+    10%{background-image: url(./res/ring/ring_011.png);}
+    11%{background-image: url(./res/ring/ring_012.png);}
+    12%{background-image: url(./res/ring/ring_013.png);}
+    13%{background-image: url(./res/ring/ring_014.png);}
+    14%{background-image: url(./res/ring/ring_015.png);}
+    15%{background-image: url(./res/ring/ring_016.png);}
+    16%{background-image: url(./res/ring/ring_017.png);}
+    17%{background-image: url(./res/ring/ring_018.png);}
+    18%{background-image: url(./res/ring/ring_019.png);}
+    19%{background-image: url(./res/ring/ring_020.png);}
+    20%{background-image: url(./res/ring/ring_021.png);}
+    21%{background-image: url(./res/ring/ring_022.png);}
+    22%{background-image: url(./res/ring/ring_023.png);}
+    23%{background-image: url(./res/ring/ring_024.png);}
+    24%{background-image: url(./res/ring/ring_025.png);}
+    25%{background-image: url(./res/ring/ring_026.png);}
+    26%{background-image: url(./res/ring/ring_027.png);}
+    27%{background-image: url(./res/ring/ring_028.png);}
+    28%{background-image: url(./res/ring/ring_029.png);}
+    29%{background-image: url(./res/ring/ring_030.png);}
+    30%{background-image: url(./res/ring/ring_031.png);}
+    31%{background-image: url(./res/ring/ring_032.png);}
+    32%{background-image: url(./res/ring/ring_033.png);}
+    33%{background-image: url(./res/ring/ring_034.png);}
+    34%{background-image: url(./res/ring/ring_035.png);}
+    35%{background-image: url(./res/ring/ring_036.png);}
+    36%{background-image: url(./res/ring/ring_037.png);}
+    37%{background-image: url(./res/ring/ring_038.png);}
+    38%{background-image: url(./res/ring/ring_039.png);}
+    39%{background-image: url(./res/ring/ring_040.png);}
+    40%{background-image: url(./res/ring/ring_041.png);}
+    41%{background-image: url(./res/ring/ring_042.png);}
+    42%{background-image: url(./res/ring/ring_043.png);}
+    43%{background-image: url(./res/ring/ring_044.png);}
+    44%{background-image: url(./res/ring/ring_045.png);}
+    45%{background-image: url(./res/ring/ring_046.png);}
+    46%{background-image: url(./res/ring/ring_047.png);}
+    47%{background-image: url(./res/ring/ring_048.png);}
+    48%{background-image: url(./res/ring/ring_049.png);}
+    49%{background-image: url(./res/ring/ring_050.png);}
+    50%{background-image: url(./res/ring/ring_051.png);}
+    51%{background-image: url(./res/ring/ring_052.png);}
+    52%{background-image: url(./res/ring/ring_053.png);}
+    53%{background-image: url(./res/ring/ring_054.png);}
+    54%{background-image: url(./res/ring/ring_055.png);}
+    55%{background-image: url(./res/ring/ring_056.png);}
+    56%{background-image: url(./res/ring/ring_057.png);}
+    57%{background-image: url(./res/ring/ring_058.png);}
+    58%{background-image: url(./res/ring/ring_059.png);}
+    59%{background-image: url(./res/ring/ring_060.png);}
+    60%{background-image: url(./res/ring/ring_061.png);}
+    61%{background-image: url(./res/ring/ring_062.png);}
+    62%{background-image: url(./res/ring/ring_063.png);}
+    63%{background-image: url(./res/ring/ring_064.png);}
+    64%{background-image: url(./res/ring/ring_065.png);}
+    65%{background-image: url(./res/ring/ring_066.png);}
+    66%{background-image: url(./res/ring/ring_067.png);}
+    67%{background-image: url(./res/ring/ring_068.png);}
+    68%{background-image: url(./res/ring/ring_069.png);}
+    69%{background-image: url(./res/ring/ring_070.png);}
+    70%{background-image: url(./res/ring/ring_071.png);}
+    71%{background-image: url(./res/ring/ring_072.png);}
+    72%{background-image: url(./res/ring/ring_073.png);}
+    73%{background-image: url(./res/ring/ring_074.png);}
+    74%{background-image: url(./res/ring/ring_075.png);}
+    75%{background-image: url(./res/ring/ring_076.png);}
+    76%{background-image: url(./res/ring/ring_077.png);}
+    77%{background-image: url(./res/ring/ring_078.png);}
+    78%{background-image: url(./res/ring/ring_079.png);}
+    79%{background-image: url(./res/ring/ring_080.png);}
+    80%{background-image: url(./res/ring/ring_081.png);}
+    81%{background-image: url(./res/ring/ring_082.png);}
+    82%{background-image: url(./res/ring/ring_083.png);}
+    83%{background-image: url(./res/ring/ring_084.png);}
+    84%{background-image: url(./res/ring/ring_085.png);}
+    85%{background-image: url(./res/ring/ring_086.png);}
+    86%{background-image: url(./res/ring/ring_087.png);}
+    87%{background-image: url(./res/ring/ring_088.png);}
+    88%{background-image: url(./res/ring/ring_089.png);}
+    89%{background-image: url(./res/ring/ring_090.png);}
+    90%{background-image: url(./res/ring/ring_091.png);}
+    91%{background-image: url(./res/ring/ring_092.png);}
+    92%{background-image: url(./res/ring/ring_093.png);}
+    93%{background-image: url(./res/ring/ring_094.png);}
+    94%{background-image: url(./res/ring/ring_095.png);}
+    95%{background-image: url(./res/ring/ring_096.png);}
+    96%{background-image: url(./res/ring/ring_097.png);}
+    97%{background-image: url(./res/ring/ring_098.png);}
+    98%{background-image: url(./res/ring/ring_099.png);}
+    99%{background-image: url(./res/ring/ring_100.png);}
+    100%{background-image: url(./res/ring/ring_101.png);}
+}
+.bus-blue, .bus-green, .bus-red{
+    padding: 1px 4px 2px 4px;
+    line-height: 1.8;
+    border-radius: 2px;
+    margin-left: 6px;
+    margin-right: 2px;
+    font-weight: 300;
+}
+.bus-num{
+    color: #b0b0b0;
+}
+.bus-blue{
+    background: rgba(56, 109, 232, 0.4);
+    margin-left: 0;
+}
+.bus-green{
+    background: rgba(60, 195, 68, 0.4);
+}
+.bus-red{
+    background: rgba(251, 88, 82, 0.4);
+}
 
 /* -- 반응형 */
+@media (max-width: 399px){
+    html{
+        scroll-snap-type: none;
+    }
+    section{
+        scroll-snap-stop: none;
+    }
+}
 @media (max-width: 359px){
     /* -- 모달 팝업 관련 */
     #box-nav-layer li{
@@ -826,6 +1366,24 @@ button{
     #section1 > div > span.hidden{
         display: none;
     }
+}
+@media (max-height: 700px){
+    /* -- 공통 컴포넌트 관련 */
+    form > label > input,
+    form > label > textarea{
+        padding: 0 0 0 0;
+    }
+}
+@media (max-height: 599px){
+    /* -- 섹션 5 디자인 관련 */
+    .xunited-img-1{
+        bottom: -8%;
+    }
+    /* -- 섹션 6 디자인 관련 */
+    button{
+        margin-bottom: 4px;
+    }
+    
 }
 @media (max-width: 599px){
     /* -- 섹션 1 디자인 관련 */
@@ -845,6 +1403,7 @@ button{
     .web-left{
         border-bottom: unset;
         border-right: 1px solid #fff;
+        flex: 1 !important;
 
         width: 50%; /* -- 600px 미만에서 width, height 비율 전환 */
         height: 100%;
@@ -852,6 +1411,7 @@ button{
     .web-right{
         width: 50%;
         height: 100%;
+        flex: 1 !important;
     }
     .vertical-blank{
         flex-grow: unset;
@@ -902,6 +1462,53 @@ button{
         width: 174px;
         height: 180px;
     }
+    /* -- 섹션 5 디자인 관련 */
+    #section5 > .container > .column-body > .web-left{
+        border-right: unset;
+    }
+    .xunited-img-1{
+        width: 60vh;
+        height: 60vh;
+        right: -5%;
+    }
+    /* -- 섹션 6 디자인 관련 */
+    .culture-img-1::after,
+    .culture-img-2::after{
+        width: 128px;
+        height: 128px;
+    }
+    /* -- 섹션 7 디자인 관련 */
+    .contact-img-1::after{
+        display: inherit;
+    }
+    form > label > span{
+        padding-top: 4px;
+    }
+    .check-label > p{
+        padding-right: 80px;
+    }
+    /* -- 섹션 8 디자인 관련 */
+    #map{
+        height: 50%;
+    }
+    .column-body.footer > .web-left{
+        display: inherit;
+    }
+    .body-wrap.footer{
+        padding-left: 6vw;
+        padding-right: 6vw;
+    }
+}
+@media (min-height: 700px){
+    /* -- 섹션 공통 레이아웃 관련 */
+    .vertical-blank{
+        flex-grow: unset;
+        height: 40px;
+    }
+    /* -- 섹션 5 디자인 관련 */
+    .xunited-img-1{
+        bottom: 3%;
+    }
 }
 @media (min-width: 1000px){
     /* -- 모달 팝업 관련 */
@@ -928,6 +1535,38 @@ button{
     .bizline{
         height: calc(100% - 90px);
     }
+    /* -- 섹션 5 디자인 관련 */
+    .xunited-img-1{
+        width: 80vh;
+        max-width: 650px;
+        height: 80vh;
+        max-height: 650px;
+        right: -5%;
+    }
+    /* -- 섹션 6 디자인 */
+    .culture-img-1::after,
+    .culture-img-2::after{
+        width: 216px;
+        height: 216px;
+    }
+    /* -- 섹션 7 디자인 */
+    .contact-img-1::after{
+    width: 358px;
+    height: 267px;
+    right: -30px;
+    bottom: -70px;
+    }
+    .copy{
+        margin-left: 12px;
+        background-size: 90%;
+    }
+    .check-label > p{
+        width: inherit;
+    }
+    /* -- 섹션 8 디자인 관련 */
+    #map{
+        height: 100%;
+    }
 }
 @media (min-width: 1600px){
     .column-num{
@@ -950,15 +1589,43 @@ button{
     .bizline{
         height: calc(100% - 120px);
     }
-}
-@media (min-height: 700px){
-    /* -- 섹션 공통 레이아웃 관련 */
-    .vertical-blank{
-        flex-grow: unset;
-        height: 40px;
+    /* -- 섹션 5 디자인 */
+    .xunited-img-1{
+        max-width: 850px;
+        max-height: 850px;
+    }
+    /* -- 섹션 6 디자인 */
+    .culture-img-1::after,
+    .culture-img-2::after{
+        width: 288px;
+        height: 288px;
+    }
+    /* -- 섹션 7 디자인 */
+    .contact-img-1::after{
+        width: 453px;
+        height: 338px;
+        right: -30px;
+        height: -60px;
+        }
+    .copy{
+        margin-left: 12px;
+        background-size: 95%;
+    }
+    /* -- 섹션 8 디자인 관련 */
+    #map{
+        height: 130%;
+        max-height: 800px;
     }
 }
 @media (max-height: 700px){
+    /* -- 공통 컴포넌트 관련 */
+    button{
+        padding: 6px 10px;
+    }
+    .column-num > p,
+    .body-wrap > p{
+        margin-bottom: 2px;
+    }
     /* -- 섹션 4 디자인 관련 */
     .bizline-img-1::after{
         width: 81px;
@@ -972,4 +1639,91 @@ button{
         width: 87px;
         height: 90px;
     }
+    /* -- 섹션 7 디자인 관련 */
+    .check-label > p{
+        font-size: 11px;
+        width: 47vw;
+    }
+    #contact-send{
+        bottom: 6px;
+    }
 }
+/* -- 화면 감지 경고 */
+@media (max-height: 480px){
+    header::after{
+        content: '⚠ 쾌적한 이용 경험을 위해 조금 더 넓은 화면에서 접속하시기를 권장드립니다.\A      - 권장 해상도 1: 세로 모드(Portrait)일 때, 가로(Width) 360px 이상\A      - 권장 해상도 2: 가로 모드(Landscape)일 때, 세로(Height) 480px 이상';
+        white-space: pre;
+        color: #101010;
+        background-color: rgba(255, 192, 98, 0.8);
+        padding: 12px 24px;
+        position: absolute;
+        top: 80px;
+        right: 0;
+        left: 0;
+        height: fit-content;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+    #section2 > .container > .column-body > .web-left,
+    #section3 > .container > .column-body > .web-left,
+    #section5 > .container > .column-body > .web-left,
+    #section6 > .container > .column-body > .web-left,
+    #section7 > .container > .column-body > .web-left{
+        height: 100%;
+        border-bottom: unset;
+    }
+    #section2 > .container > .column-body > .web-right,
+    #section3 > .container > .column-body > .web-right,
+    #section5 > .container > .column-body > .web-right,
+    #section6 > .container > .column-body > .web-right,
+    #section7 > .container > .column-body > .web-right,
+    .xunited-img-1{
+        display: none;
+    }
+}
+@media (max-width: 319px){
+    header::after{
+        content: '⚠ 쾌적한 이용 경험을 위해 조금 더\A넓은 화면에서 접속하시기를 권장드립니다.\A- 권장 해상도 1:\A세로 모드(Portrait)일 때,\A가로(Width) 360px 이상\A- 권장 해상도 2:\A가로 모드(Landscape)일 때,\A세로(Height) 480px 이상';
+        white-space: pre;
+        color: #101010;
+        background-color: rgba(255, 192, 98, 0.8);
+        padding: 12px 24px;
+        position: absolute;
+        top: 80px;
+        right: 0;
+        left: 0;
+        height: fit-content;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+    #section2 > .container > .column-body > .web-left,
+    #section3 > .container > .column-body > .web-left,
+    #section5 > .container > .column-body > .web-left,
+    #section6 > .container > .column-body > .web-left,
+    #section7 > .container > .column-body > .web-left{
+        height: 100%;
+        border-bottom: unset;
+    }
+    #section2 > .container > .column-body > .web-right,
+    #section3 > .container > .column-body > .web-right,
+    #section5 > .container > .column-body > .web-right,
+    #section6 > .container > .column-body > .web-right,
+    #section7 > .container > .column-body > .web-right,
+    .xunited-img-1{
+        display: none;
+    }
+}
+
+/* -- 모바일 사파리 임시 지원용 */
+#section9{
+    height: 80px;
+    display: none;
+}
+@supports (-webkit-touch-callout: none) {
+    #section9{
+        display: inherit;
+    }
+  }
